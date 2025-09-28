@@ -1,0 +1,61 @@
+[tool.ruff]
+target-version = "py38"  # Updated to match minimum Python version
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "W",   # pycodestyle warnings
+    "C90", # mccabe complexity
+    "N",   # pep8-naming
+    "B",   # flake8-bugbear
+    "S",   # flake8-bandit
+    "A",   # flake8-builtins
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "S101",  # Use of assert detected (allowed in tests)
+    "B904",  # Within an except clause, raise exceptions with raise ... from err
+    "S603",  # subprocess call: check for execution of untrusted input
+    "S607",  # Starting a process with a partial executable path
+    "B017",  # pytest.raises() should be used as a context manager
+    "A002",  # Function argument shadows a Python builtin
+]
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["yaml_resume_builder"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.black]
+line-length = 100
+target-version = ["py36", "py37", "py38", "py39", "py310", "py311"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
